@@ -1,2 +1,2 @@
 # Hongyil1.github.io
-HY Blog
+My Technical Blog
