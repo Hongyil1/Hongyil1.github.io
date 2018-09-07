@@ -168,3 +168,99 @@ ORDER BY
     total DESC;
 ```
 
+### join
+A relational database consists of multiple related tables linking together using common columns which are kown as **foreign key** columns. Because of this, data in each table is incomplete from the business perspective.
+
+MySQL supports the following types of joins:
+1. Cross join
+2. Inner join
+3. Left join
+4. Right join
+
+To make easy for understanding, we will use the t1 and t2 tables with the following structures:
+
+```
+CREATE TABLE t1 (
+    id INT PRIMARY KEY,
+    pattern VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE t2(
+    id VARCHAR(50) PRIMARY KEY,
+    pattern VARCHAR(50) NOT NULL
+);
+```
+
+Then we insert data into both t1 and t2 tables:
+
+```
+INSERT INTO t1(id, pattern)
+VALUES
+    (1, 'Divot'),
+    (2, 'Brick'),
+    (3, 'Grid');
+
+INSERT INTO t2(id, pattern)
+VALUES
+    ('A', 'Brick'),
+    ('B', 'Grid'),
+    ('C', 'Diamond');
+```
+
+**CROSS JOIN**
+
+The CROSS JOIN makes a Cartesian product(笛卡尔乘积) of rows from multiple tables. Suppose, you join t1 and t2 tables using the CROSS JOIN, the result set will include the combinations of rows from the t1 tables with the rows in t2 table.
+
+```
+SELECT
+    t1.id, t2.id
+FROM
+    t1
+CROSS JOIN t2;
+```
+
+| id    | id    |
+|:------|:------|
+| 1     | C     |
+| 1     | B     |
+| 1     | A     |
+| 2     | C     |
+| 2     | B     |
+| 2     | A     |
+| 3     | C     |
+| 3     | B     |
+| 3     | A     |
+
+<p align="center"><img width="426" alt="cross join" src="https://user-images.githubusercontent.com/22671087/45215143-e2f5a280-b2df-11e8-9468-4b1cb51a8ef7.PNG"></p>
+
+**INNER JOIN**
+
+An INNER JOIN requires rows in the two joined tables to have matching column values. The INNER JOIN creates the result set by combining column values of two joined tables based on the join-predicate. To join two tables, the INNER JOIN compares each row in the first table with each row in the second table to find pairs of rows that satisfy the join-predicate. Whenever the join-predicate is satisfied by matching non_NULL value, column values for each matched pair of rows of the two tables are included in the result set.
+
+```
+SELECT
+    t1.id, t2.id
+FROM
+    t1
+        INNER JOIN
+    t2 ON t1.pattern = t2.pattern;
+```
+
+In this statement, the join-predicate is t1.pattern = t2.pattern. It means that rows in t1 and t2 tables must have the same value in the pattern column to be included in the result.
+
+| id    | id    |
+|:------|:------|
+| 2     | A     |
+| 3     | B     |
+
+<p align="center"><img width="418" alt="inner join" src="https://user-images.githubusercontent.com/22671087/45215613-5b109800-b2e1-11e8-8733-a4f51a42bc0e.PNG"></p>
+
+**LEFT JOIN**
+
+
+
+
+
+
+
+
