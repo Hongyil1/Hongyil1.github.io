@@ -231,7 +231,7 @@ CROSS JOIN t2;
 | 3     | B     |
 | 3     | A     |
 
-<p align="center"><img width="426" alt="cross join" src="https://user-images.githubusercontent.com/22671087/45215143-e2f5a280-b2df-11e8-9468-4b1cb51a8ef7.PNG"></p>
+<img width="426" alt="cross join" src="https://user-images.githubusercontent.com/22671087/45215143-e2f5a280-b2df-11e8-9468-4b1cb51a8ef7.PNG">
 
 **INNER JOIN**
 
@@ -253,9 +253,52 @@ In this statement, the join-predicate is t1.pattern = t2.pattern. It means that 
 | 2     | A     |
 | 3     | B     |
 
-<p align="center"><img width="418" alt="inner join" src="https://user-images.githubusercontent.com/22671087/45215613-5b109800-b2e1-11e8-8733-a4f51a42bc0e.PNG"></p>
+<img width="418" alt="inner join" src="https://user-images.githubusercontent.com/22671087/45215613-5b109800-b2e1-11e8-8733-a4f51a42bc0e.PNG">
 
 **LEFT JOIN**
+
+Similar to an INNER JOIN, a LEFT JOIN also requires a join-predicate. When joining two tables, the concepts of left table and right table are introduced. A LEFT JOIN returns all rows in the left table including rows that satisfy join-predicate and rows that do not. For the rows that do not match the join-predicate, NULLs appear in the columns of the right table in the result set.
+
+```
+SELECT
+    t1.id, t2.id
+FROM
+    t1
+        LEFT JOIN
+    t2 ON t1.pattern = t2.pattern
+ORDER BY t1.id;
+```
+
+| id    | id    |
+|:------|:------|
+| 1     | NULL  |
+| 2     | A     |
+| 3     | B     |
+
+<img width="420" alt="left join" src="https://user-images.githubusercontent.com/22671087/45215929-47196600-b2e2-11e8-8845-d33260a5fc6a.PNG">
+
+**RIGHT JOIN**
+A RIGHT JOIN is similar to the LEFT JOIN except that the treatment of tables is reversed.
+
+```
+SELECT
+    t1.id, t2.id
+FROM
+    t1
+        RIGHT JOIN
+    t2 ON t1.pattern = t2.pattern
+ORDER BY
+    t2.id;
+```
+| id    | id    |
+|:------|:------|
+| 2     | A     |
+| 3     | B     |
+| NULL  | C     |
+
+<img width="417" alt="right join" src="https://user-images.githubusercontent.com/22671087/45216108-cc9d1600-b2e2-11e8-9611-445a514e6e65.PNG">
+
+
 
 
 
