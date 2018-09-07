@@ -76,3 +76,85 @@ ORDER BY FIELD(status,
           "Disputed",
           "Shipped");
 ```
+
+## Joining tables
+### Alias
+MySQL supports two kinds of aliases which are known as column alias and table alias.
+
+**Alias for columns**
+Sometimes the names of columns are so technical that make the query's output very difficult to understand. To give a column a descriptive name, you use a column alias.
+
+```
+SELECT
+    [column_1 | expression] AS descriptive_name
+FROM
+    table_name;
+```
+
+To give a column an alias, you use the *AS* keyword followed by the alias. If the alias contains space, you must quote it as the following:
+
+```
+SELECT 
+    [column_1 | expression] AS 'descriptive name'
+FROM
+    table_name;
+```
+
+For example, the following query selects first names and last names of employees and combines them to produce the full names. The **CONCAT_WS** function is used to concatenate first name and last name.
+
+```
+SELECT
+    CONCAT_WS(', ', lastName, firstname)
+FROM
+    employees;
+```
+
+> The CONCAT and CONCAT_WS functions are used to combine strings.
+'''
+SELECT CONCAT('AB', 'CD');
+--------------------------
+ABCD
+'''
+> CONCAT_WS means concat with separator.
+'''
+SELECT CONCAT_WS(',', '11', '22', '33');
+----------------------------------------
+11,22,33
+'''
+The following statement selects the orders whose total amount are greater than 60000. It uses column aliases in GROUP BY and HAVING clauses.
+
+```
+SELECT
+    orderNumber AS `Order no.`,
+    SUM(priceEach * quantityOrdered) AS total
+FROM
+    orderdetails
+GROUP BY
+    `Order no.`
+HAVING 
+    total > 60000;
+```
+> It's ` instead of '.
+> You cannot use a column alias in the WHEREclause. The reason is that when MySQL evaluates the WHERE clause, the values of columns specified in the SELECT clause may not be determined yet.
+
+**Alias for tables**
+You can use an alias to give a table a different name. You assign a table an alias by using the AS keyword as the following syntax:
+
+```
+table_name AS table_alias
+```
+You often use the table alias in the statement that contains **INNER JOIN, LEFT JOIN, self join** clauses, and in subsqueries.
+
+```
+SELECT 
+    customerName,
+    COUNT(o.orderNumber) total
+FROM
+    customers c
+INNER JOIN orders o ON c.customerNumber = o.customerNumber
+GROUP BY
+    customerName
+ORDER BY
+    total DESC;
+```
+
