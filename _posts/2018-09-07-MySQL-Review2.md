@@ -110,17 +110,21 @@ FROM
 ```
 
 > The CONCAT and CONCAT_WS functions are used to combine strings.
-'''
+
+```
 SELECT CONCAT('AB', 'CD');
 --------------------------
 ABCD
-'''
+```
+
 > CONCAT_WS means concat with separator.
-'''
+
+```
 SELECT CONCAT_WS(',', '11', '22', '33');
 ----------------------------------------
 11,22,33
-'''
+```
+
 The following statement selects the orders whose total amount are greater than 60000. It uses column aliases in GROUP BY and HAVING clauses.
 
 ```
@@ -134,15 +138,19 @@ GROUP BY
 HAVING 
     total > 60000;
 ```
+
 > It's ` instead of '.
+
 > You cannot use a column alias in the WHEREclause. The reason is that when MySQL evaluates the WHERE clause, the values of columns specified in the SELECT clause may not be determined yet.
 
 **Alias for tables**
+
 You can use an alias to give a table a different name. You assign a table an alias by using the AS keyword as the following syntax:
 
 ```
 table_name AS table_alias
 ```
+
 You often use the table alias in the statement that contains **INNER JOIN, LEFT JOIN, self join** clauses, and in subsqueries.
 
 ```
