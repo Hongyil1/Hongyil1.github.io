@@ -168,7 +168,7 @@ ORDER BY
     total DESC;
 ```
 
-### join
+### JOIN
 A relational database consists of multiple related tables linking together using common columns which are kown as **foreign key** columns. Because of this, data in each table is incomplete from the business perspective.
 
 MySQL supports the following types of joins:
@@ -278,6 +278,7 @@ ORDER BY t1.id;
 <img width="420" alt="left join" src="https://user-images.githubusercontent.com/22671087/45215929-47196600-b2e2-11e8-8845-d33260a5fc6a.PNG">
 
 **RIGHT JOIN**
+
 A RIGHT JOIN is similar to the LEFT JOIN except that the treatment of tables is reversed.
 
 ```
