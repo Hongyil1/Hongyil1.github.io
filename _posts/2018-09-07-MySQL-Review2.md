@@ -299,6 +299,83 @@ ORDER BY
 
 <img width="417" alt="right join" src="https://user-images.githubusercontent.com/22671087/45216108-cc9d1600-b2e2-11e8-9611-445a514e6e65.PNG">
 
+### INNER JOIN
+The MySQL *INNER JOIN* clause matches rows in one table with rows in other tables allows you to query rows that contain columns from both tables.
+
+Before using the *INNER JOIN* clause, you have to specify the following criteria:
+* First, the main table that appears in the FROM clause.
+* Second, the table that you want to join with the main table, which appears in the *INNER JOIN* clause. In theory, you can join a table with many other tables. However, for a better performance, you should limit the number of tables to join.
+* Third, the join condition or join predicate. The join condition appears after the ON keyword of the INNER JOIN clause. The join condition is the rule for matching rows in the main table with the rows in the other tables.
+
+```
+SELECT column_list
+FROM t1
+INNER JOIN t2 ON join_condition1
+INNER JOIN t3 ON join_condition2
+...
+WHERE where_conditions;
+```
+
+<img width="217" alt="inner join graph" src="https://user-images.githubusercontent.com/22671087/45219357-f60f6f00-b2ed-11e8-8302-34838954ff99.PNG">
+
+**MySQL INNER JOIN examples**
+
+<img width="369" alt="inner join exam" src="https://user-images.githubusercontent.com/22671087/45219520-8352c380-b2ee-11e8-9bdd-40397c324c36.PNG">
+
+In this diagram, the products table has the productLine column referenced to the  productline column of the  productlines table. The productLine column in the products table is called a **foreign key** column. Typically, you join tables that have foreign key relationships like the productlines and products tables.
+
+Now, if you want to get:
+* The *productCode* and *productName* from the *products* table.
+* The *textDescription* of product lines from the productlines table.
+
+```
+SELECT
+    productCode, productName, textDescription
+FROM
+    productlines t1
+        INNER JOIN
+    products t2 ON t1.productLine = t2.productLine;
+```
+
+**INNER JOIN with GROUP BY**
+
+<img width="343" alt="innerjoin_group by" src="https://user-images.githubusercontent.com/22671087/45219851-8e5a2380-b2ef-11e8-88fb-543c605b7680.PNG">
+
+You can get the order number, order status and total sales from the orders and orderdetails tables using the INNER JOIN clause with the GROUP BYclause as follows:
+
+```
+SELECT
+    t1.orderNumber,
+    status,
+    SUM(quantityOrdered * priceEach) total
+FROM
+    orders AS t1
+        INNER JOIN
+    orderdetails AS t2 ON t1.orderNumber = t2.orderNumber
+GROUP BY orderNumber;
+```
+
+**INNER JOIN using operator other than equal**
+
+The following query uses a less-than ( <) join to find sales prices of the product whose code is S10_1678 that are less than the manufacturer’s suggested retail price (MSRP) for that product.
+
+```
+SELECT
+    orderNumber,
+    productName,
+    msrp,
+    priceEach
+FROM
+    products p
+        INNER JOIN
+    orderdetails o ON p.productcode = o.productcode
+        AND p.msrp > o.priceEach
+WHERE
+    p.productcode = 'S10_1678';
+```
+
+
+
 
 
 
