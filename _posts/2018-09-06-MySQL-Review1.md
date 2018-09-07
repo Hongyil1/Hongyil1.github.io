@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      MySQL Review
+title:      MySQL Review 1
 subtitle:   Knowledge and command in MySql
 date:       2018-09-06
 author:     Hongyi
