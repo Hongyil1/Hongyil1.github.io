@@ -36,6 +36,7 @@ ORDER BY
 ```
 
 **MySQL ORDER BY sort by an expression example**
+
 The *ORDER BY* clause also allows you to sort the result set based on an expression.
 
 The following query selects the order line items from the orderdetails table. It calculates the subtotal for each line item and sorts the result set based on the order number, order line number, and subtotal.
@@ -53,6 +54,7 @@ ORDER BY
 ```
 
 **ORDER BY with custom sort order**
+
 The *ORDER BY* clause enables you to define your own custom sort order for the values in a column using the *FIELD()* function.
 
 For example, if you want to sort the orders based on the following status by the following order:
