@@ -374,12 +374,67 @@ WHERE
     p.productcode = 'S10_1678';
 ```
 
+### LEFT JOIN
+When you join the t1 table to the t2 table using the LEFT JOIN clause, if a row from the left table t1 matches a row from the right table t2 based on the join condition ( t1.c1 = t2.c1 ), this row will be included in the result set.
 
+In case the row in the left table does not match with the row in the right table, the row in the left table is also selected and combined with a “fake” row from the right table. The fake row contains NULL for all corresponding columns in the SELECT clause.
 
+<img width="254" alt="lft join" src="https://user-images.githubusercontent.com/22671087/45247735-21757680-b34d-11e8-8976-8be2465ab187.PNG">
 
+**Using LEFT JOIN to find unmatched rows**
 
+The LEFT JOIN clause is very useful when you want to find the rows in the left table that do not match with the rows in the right table. To find the unmatching rows between two tables, you add a WHERE clause to the SELECT statement to query only rows whose column values in the right table contains the NULL values.
 
+For example, to find all customers who have not placed any order, you use the following query:
 
+```
+SELECT
+    c.customerNumber,
+    c.customerName,
+    orderNumber,
+    o.status
+FROM
+    customers c
+        LEFT JOIN
+    orders o ON c.customerNumber = o.customerNumber
+WHERE
+    orderNumber IS NULL;
+```
+
+**Condition in WHERE clause vs. ON clause**
+
+```
+SELECT 
+    o.orderNumber, 
+    customerNumber, 
+    productCode
+FROM
+    orders o
+        LEFT JOIN
+    orderDetails USING (orderNumber)
+WHERE
+    orderNumber = 10123;
+```
+![lfj-ex](https://user-images.githubusercontent.com/22671087/45247917-9f864d00-b34e-11e8-98d1-73d560cbb112.png)
+
+However, if you move the condition from the WHERE clause to the ON clause:
+
+```
+SELECT 
+    o.orderNumber, 
+    customerNumber, 
+    productCode
+FROM
+    orders o
+        LEFT JOIN
+    orderDetails d ON o.orderNumber = d.orderNumber
+        AND o.orderNumber = 10123;
+```
+The query returns all orders but only the order 10123 will have detail associated with it as shown below.
+
+![mysql-left-join-condition-in-on-clause](https://user-images.githubusercontent.com/22671087/45247936-d8262680-b34e-11e8-91f0-baef26b0982b.png)
+
+> Notice that for **INNER JOIN** clause, the condition in the ON clause is equivalent to the condition in the WHERE clause.
 
 
 
