@@ -153,9 +153,11 @@ One way to always have a perfect hash function is to increase the size of the ha
 One way to always have a perfect hash function is to increase the size of the hash table so that each possible value in the item range can be accommodated. 
 
 1. **Folding Method**
+
 The **folding method** for constructing hash functions begins by dividing the item into equal-size pieces (the last piece may not be of equal size). These pieces are then added together to give the resulting hash value. For example, if our item was the phone number 436-555-4601, we would take the digits and divide them into groups of 2 (43,65,55,46,01). After the addition, 43+65+55+46+01, we get 210. If we assume our hash table has 11 slots, then we need to perform the extra step of dividing by 11 and keeping the remainder. In this case 210 % 11 is 1, so the phone number 436-555-4601 hashes to slot 1. Some folding methods go one step further and **reverse** every other piece before the addition. For the above example, we get 43+56+55+64+01=219 which gives 219 % 11=10.
 
 2. **mid-square method**
+
 We first square the item, and then extract some portion of the resulting digits. For example, if the item were 44, we would first compute 44^2=1936. By extracting the middle two digits, 93, and performing the remainder step, we get 5 (93 % 11).
 
 | Item  | square    | Mid-Square    |
