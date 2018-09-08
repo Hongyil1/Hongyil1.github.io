@@ -448,12 +448,12 @@ To get the whole organization structure, you can join the employees table to its
 
 ```
 SELECT
-	CONCAT(m.lastName, ' ', m.firstName) AS Manager,
+    CONCAT(m.lastName, ' ', m.firstName) AS Manager,
     CONCAT(e.lastName, ' ', e.firstName) AS 'Direct report'
 FROM
-	employees m
-		INNER JOIN
-	employees e ON m.employeeNumber = e.reportsTo
+    employees m
+	INNER JOIN
+    employees e ON m.employeeNumber = e.reportsTo
 ORDER BY Manager;
 ```
 
@@ -461,32 +461,121 @@ If you want to find the *TOP MANAGER*, that's the employee who does not have any
 
 ```
 SELECT
-	IFNULL(CONCAT(m.lastName, ' ', m.firstName), "Top Manager") AS Manager,
+    IFNULL(CONCAT(m.lastName, ' ', m.firstName), "Top Manager") AS Manager,
     CONCAT(e.lastName, ' ', e.firstName) AS 'Direct report'
 FROM
-	employees e
-		LEFT JOIN
-	employees m ON m.employeeNumber = e.reportsTo
+    employees e
+    	LEFT JOIN
+    employees m ON m.employeeNumber = e.reportsTo
 WHERE
-	m.lastName IS NULL;
+    m.lastName IS NULL;
 ```
 
 By using the MySQL self join, you can display a list of customers who locate in the same city by joining the customers table to itself.
 
 ```
 SELECT
-	c1.city,
-	c1.customerName AS customer1,
+    c1.city,
+    c1.customerName AS customer1,
     c2.customerName AS customer2
 FROM
-	customers c1
-		INNER JOIN
-	customers c2 ON c1.city = c2.city
-		AND c1.customerName > c2.customerName
+    customers c1
+	INNER JOIN
+    customers c2 ON c1.city = c2.city
+	AND c1.customerName > c2.customerName
 ORDER BY c1.city;
 ```
 
 * c1.city = c2.city to make sure that both customers have the same city.
 * c1.customerName > c2.customerName to ensure that we don't get the same customer. 
 
+## GROUPING DATA
+### GROUP BY
+You often use the GROUP BY clause with aggregate functions such as **SUM, AVG, MAX, MIN, and COUNT**. The aggregate function that appears in the SELECT clause provides the information about each group.
+
+```
+SELECT
+    c1, c2, ..., cn, aggregate_function(ci)
+FROM
+    table
+WHERE
+    where_conditions
+GROUP BY c1, c2,..., cn;
+```
+
+**GROUP BY with aggregate functions**
+
+The aggregate functions allow you to perform the calculation of a set of rows and return a single value. The GROUP BY clause is often used with an aggregate function to perform calculation and return a single value for each subgroup.
+
+## Aggregate functions
+### AVG function
+The AVG function calculates the average value of a set of values. It ignores NULL values in the calculation.
+
+```
+AVG(expression)
+```
+You can use the AVG function to calculate the average buy price of all products in the products table by using the following query:
+
+```
+SELECT AVG(buyPrice) average_buy_price
+FROM products;
+```
+### COUNT function
+The COUNT function returns the number of the rows in a table. For example, you can use the COUNT function to get the number of products in the products table as the following query:
+
+```
+SELECT COUNT(*) AS Total
+FROM products;
+```
+
+> The COUNT function has several forms such as COUNT(*) and COUNT(DISTINCT expression) .
+
+### SUM function
+The SUM function returns the sum of a set of values. The SUM function ignores NULL values. If no matching row found, the SUM function returns a NULL value.
+
+To get the total sales of each product, you can use the SUM function in conjunction with the GROUP BY clause as follows:
+
+```
+SELECT productCode,sum(priceEach * quantityOrdered) total
+FROM orderdetails
+GROUP by productCode;
+```
+
+To see the result in more detail, you can join the orderdetails table to the products table as the following query:
+
+```
+SELECT P.productCode,
+       P.productName,
+       SUM(priceEach * quantityOrdered) total
+FROM orderdetails O
+INNER JOIN products  P ON O.productCode = P.productCode
+GROUP by productCode
+ORDER BY total;
+```
+### MAX function
+The MAX function returns the maximum value in a set of values.
+
+```
+MAX(expression)
+```
+
+For example, you can use the MAX function to get the most expensive product in the products table as the following query:
+
+```
+SELECT MAX(buyPrice) highest_price
+FROM Products;
+```
+
+### MIN function
+The MIN function returns the minimum value in a set of values.
+
+```
+MIN(expression)
+```
+For example, the following query uses the MIN function to find the product with the lowest price in the products table:
+
+```
+SELECT MIN(buyPrice) lowest_price
+FROM Products;
+```
 
