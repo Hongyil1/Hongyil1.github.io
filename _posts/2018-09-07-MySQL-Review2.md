@@ -528,7 +528,9 @@ FROM
     orderdetails USING (orderNumber)
 GROUP BY status;
 ```
+
 **GROUP BY with expression example**
+
 In addition to columns, you can group rows by expressions. The following query gets the total sales for each year.
 
 ```
@@ -707,7 +709,7 @@ WHERE
             orders);
 ```
 
-**subquery in the FROM clause**
+**Subquery in the FROM clause**
 
 When you use a subquery in the FROM clause, the result set returned from a subquery is used as a temporary table. This table is referred to as a derived table or materialized subquery.
 
