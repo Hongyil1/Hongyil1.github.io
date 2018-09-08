@@ -10,7 +10,7 @@ tags:
     - MySQL
 ---
 
-## Sorting data
+## Sorting Data
 ### ORDER BY
 When you use *SELECT statement* to query data from a table, the result set is not sorted in any orders. To sort the result set, you use the *ORDER BY* clause. The *ORDER BY* clause allows you to:
 * Sort a result set by a single column or multiple columns.
@@ -506,6 +506,66 @@ GROUP BY c1, c2,..., cn;
 **GROUP BY with aggregate functions**
 
 The aggregate functions allow you to perform the calculation of a set of rows and return a single value. The GROUP BY clause is often used with an aggregate function to perform calculation and return a single value for each subgroup.
+
+For example, if you want to know the number orders in each status, you can use the COUNT function with the GROUP BY clause as follows:
+
+```
+SELECT 
+    status, COUNT(*)
+FROM
+    orders
+GROUP BY status;
+```
+
+To get the total amount of all orders by status, you join the orders table with the orderdetails table and use the SUM function to calculate total amount. See the following query:
+
+```
+SELECT 
+    status, SUM(quantityOrdered * priceEach) AS amount
+FROM
+    orders
+        INNER JOIN
+    orderdetails USING (orderNumber)
+GROUP BY status;
+```
+**GROUP BY with expression example**
+In addition to columns, you can group rows by expressions. The following query gets the total sales for each year.
+
+```
+SELECT 
+    YEAR(orderDate) AS year,
+    SUM(quantityOrdered * priceEach) AS total
+FROM
+    orders
+        INNER JOIN
+    orderdetails USING (orderNumber)
+WHERE
+    status = 'Shipped'
+GROUP BY YEAR(orderDate);
+```
+
+> Note that the expression which appears in the SELECT clause must be the same as the one in the GROUP BY clause.
+
+**GROUP BY with HAVING clause**
+
+To filter the groups returned by GROUP BY clause, you use a  HAVING clause. The following query uses the HAVING clause to select the total sales of the years after 2003.
+
+```
+SELECT 
+    YEAR(orderDate) AS year,
+    SUM(quantityOrdered * priceEach) AS total
+FROM
+    orders
+        INNER JOIN
+    orderdetails USING (orderNumber)
+WHERE
+    status = 'Shipped'
+GROUP BY year
+HAVING year > 2003;
+```
+
+> MySQL allows you to use alias in GROUP BY and it also allows you to sort the GROUP BY using DESC or ASC.
+
 
 ## Aggregate functions
 ### AVG function
