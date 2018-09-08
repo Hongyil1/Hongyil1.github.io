@@ -188,6 +188,27 @@ One method for resolving collisions looks into the hash table and tries to find 
 
 When we attempt to place 44 into slot 0, a collision occurs. Under linear probing, we look sequentially, slot by slot, until we find an open position. In this case, we find slot 1. Again, 55 should go in slot 0 but must be placed in slot 2 since it is the next open position. The final value of 20 hashes to slot 9. Since slot 9 is full, we begin to do linear probing. We visit slots 10, 0, 1, and 2, and finally find an empty slot at position 3.
 
+**To search** the hash table. Assume we want to look up the item 93. When we compute the hash value, we get 5. Looking in slot 5 reveals 93, and we can return True. What if we are looking for 20? Now the hash value is 9, and slot 9 is currently holding 31. We cannot simply return False since we know that there could have been collisions. We are now forced to do a sequential search, starting at position 10, looking until either we find the item 20 or we find an empty slot.  
+
+A disadvantage to linear probing is the tendency for **clustering**; items become clustered in the table. This means that if many collisions occur at the same hash value, a number of surrounding slots will be filled by the linear probing resolution. 
+
+**Skip Slots**. One way to deal with clustering is to extend the linear probing technique so that instead of looking sequentially for the next open slot, we skip slots, thereby more evenly distributing the items that have caused collisions.
+
+An alternative method for handling the collision problem is to allow each slot to hold a reference to a collection (or chain) of items. **Chaining** allows many items to exist at the same location in the hash table. When collisions happen, the item is still placed in the proper slot of the hash table. As more and more items hash to the same location, the difficulty of searching for the item in the collection increases. 
+
+![chaining](https://user-images.githubusercontent.com/22671087/45254118-c035bd80-b3b5-11e8-8d08-7c4bd73f1a18.png)
+
+When we want to search for an item, we use the hash function to generate the slot where it should reside. Since each slot holds a collection, we use a searching technique to decide whether the item is present. The **advantage** is that on the average there are likely to be many fewer items in each slot, so the search is perhaps more efficient. 
+
+### The Map Abstract Data Type
+The map abstract data type is defined as follows. The structure is an unordered collection of associations between a key and a data value. The keys in a map are all unique so that there is a one-to-one relationship between a key and a value. The operations are given below.
+
+* Map() Create a new, empty map. It returns an empty map collection.
+* put(key, val) Add a new key-value pair to the map. If the key is already in the map then replace the old value with the new value.
+* get(key) Given a key, return the value stored in the map or None otherwise.
+* del Delete the key-value pair from the map using a statement of the form del map[key].
+* len() Return the number of key-value pairs stored in the map.
+* in Return True for a statement of the form key in map, if the given key is in the map, False otherwise.
 
 
 
