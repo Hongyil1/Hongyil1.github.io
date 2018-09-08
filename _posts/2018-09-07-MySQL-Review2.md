@@ -566,6 +566,25 @@ HAVING year > 2003;
 
 > MySQL allows you to use alias in GROUP BY and it also allows you to sort the GROUP BY using DESC or ASC.
 
+```
+GROUP BY status DESC;
+```
+
+### HAVING
+The  HAVING clause is used in the SELECT statement to specify filter conditions for a group of rows or aggregates. The HAVING clause is often used with the GROUP BY clause to filter groups based on a specified condition. If the GROUP BY clause is omitted, the HAVING clause behaves like the WHERE clause.
+
+You can construct a complex condition in the HAVING clause using logical operators such as OR and AND. Suppose you want to find which orders have total sales greater than 1000 and contain more than 600 items, you can use the following query:
+
+```
+SELECT 
+    ordernumber,
+    SUM(quantityOrdered) AS itemsCount,
+    SUM(priceeach*quantityOrdered) AS total
+FROM
+    orderdetails
+GROUP BY ordernumber
+HAVING total > 1000 AND itemsCount > 600;
+```
 
 ## Aggregate functions
 ### AVG function
@@ -638,4 +657,74 @@ For example, the following query uses the MIN function to find the product with 
 SELECT MIN(buyPrice) lowest_price
 FROM Products;
 ```
+
+## Subquery
+A MySQL subquery is a query nested within another query such as SELECT, INSERT, UPDATE or DELETE. In addition, a MySQL subquery can be nested inside another subquery.
+
+For example, the following query returns the customer who has the maximum payment.
+
+```
+SELECT 
+    customerNumber, checkNumber, amount
+FROM
+    payments
+WHERE
+    amount = (SELECT 
+            MAX(amount)
+        FROM
+            payments);
+```
+
+For example, you can find customers whose payments are greater than the average payment using a subquery. 
+
+```
+SELECT 
+    customerNumber, checkNumber, amount
+FROM
+    payments
+WHERE
+    amount > (SELECT 
+            AVG(amount)
+        FROM
+            payments);
+```
+
+**Subquery with IN and NOT IN operators**
+
+![customers_orders_tables](https://user-images.githubusercontent.com/22671087/45250225-1aad2a80-b372-11e8-966b-dc7e52433649.png)
+
+For example, you can use a subquery with NOT IN operator to find the customers who have not placed any orders as follows:
+
+```
+SELECT 
+    customerName
+FROM
+    customers
+WHERE
+    customerNumber NOT IN (SELECT DISTINCT
+            customerNumber
+        FROM
+            orders);
+```
+
+**subquery in the FROM clause**
+
+When you use a subquery in the FROM clause, the result set returned from a subquery is used as a temporary table. This table is referred to as a derived table or materialized subquery.
+
+```
+SELECT 
+    MAX(items), MIN(items), FLOOR(AVG(items))
+FROM
+    (SELECT 
+        orderNumber, COUNT(orderNumber) AS items
+    FROM
+        orderdetails
+    GROUP BY orderNumber) AS lineitems;
+```
+
+> Derived table should have its own alias.
+> Note that the FLOOR() is used to remove decimal places from the average values of items.
+
+
+
 
