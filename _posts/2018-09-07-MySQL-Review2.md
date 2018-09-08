@@ -436,7 +436,57 @@ The query returns all orders but only the order 10123 will have detail associate
 
 > Notice that for **INNER JOIN** clause, the condition in the ON clause is equivalent to the condition in the WHERE clause.
 
+### CROSS JOIN
+??
 
+### SELF JOIN
+You use the self join when you want to combine rows with other rows in the same table. To perform the self join operation, you must use a table alias to help MySQL distinguish the left table from the right table of the same table in a single query.
 
+![employees_table](https://user-images.githubusercontent.com/22671087/45248045-f6d8ed00-b34f-11e8-9003-7d685d665a41.png)
+
+To get the whole organization structure, you can join the employees table to itself using the employeeNumber and reportsTo columns. The employees table has two roles: one is Manager and the other is Direct Reports.
+
+```
+SELECT
+	CONCAT(m.lastName, ' ', m.firstName) AS Manager,
+    CONCAT(e.lastName, ' ', e.firstName) AS 'Direct report'
+FROM
+	employees m
+		INNER JOIN
+	employees e ON m.employeeNumber = e.reportsTo
+ORDER BY Manager;
+```
+
+If you want to find the *TOP MANAGER*, that's the employee who does not have any manager or his manager no is NULL. Let’s change the INNER JOIN clause to the LEFT JOIN clause in the query above to include the top manager. You also need to use the IFNULL function to display the top manager if the manger’s name is NULL.
+
+```
+SELECT
+	IFNULL(CONCAT(m.lastName, ' ', m.firstName), "Top Manager") AS Manager,
+    CONCAT(e.lastName, ' ', e.firstName) AS 'Direct report'
+FROM
+	employees e
+		LEFT JOIN
+	employees m ON m.employeeNumber = e.reportsTo
+WHERE
+	m.lastName IS NULL;
+```
+
+By using the MySQL self join, you can display a list of customers who locate in the same city by joining the customers table to itself.
+
+```
+SELECT
+	c1.city,
+	c1.customerName AS customer1,
+    c2.customerName AS customer2
+FROM
+	customers c1
+		INNER JOIN
+	customers c2 ON c1.city = c2.city
+		AND c1.customerName > c2.customerName
+ORDER BY c1.city;
+```
+
+* c1.city = c2.city to make sure that both customers have the same city.
+* c1.customerName > c2.customerName to ensure that we don't get the same customer. 
 
 
