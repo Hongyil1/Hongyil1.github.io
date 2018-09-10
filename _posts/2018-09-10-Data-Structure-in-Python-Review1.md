@@ -186,6 +186,26 @@ After num dequeue/enqueue operations, the child at the front will be removed per
 
 ![](http://interactivepython.org/courselib/static/pythonds/_images/namequeue.png)
 
+```
+def hotPotato(name_list, num):
+    queue = Queue()
+    for name in name_list:
+        queue.enqueue(name)
+
+    while queue.size() > 1:
+        for i in range(num):
+            circle_name = queue.dequeue()
+            queue.enqueue(circle_name)
+
+        # delet the name
+        queue.dequeue()
+
+    return queue.dequeue()
+
+print(hotPotato(["Bill","David","Susan","Jane","Kent","Brad"],7))
+------------------------------------------------------------------
+Susan
+```
 
 
 ## What is Deque?
