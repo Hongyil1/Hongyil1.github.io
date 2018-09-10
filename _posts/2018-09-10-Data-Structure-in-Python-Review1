@@ -39,14 +39,14 @@ For example, if **s** is a stack that has been created and starts out empty, the
 | s.isEmpty()         |	[]	               | True             |
 | s.push(4)	          | [4]	               |                  |
 | s.push('dog')	      | [4,'dog']          |                  |	 
-| s.peek()	          | [4,'dog']	         | 'dog'            |
+| s.peek()	          | [4,'dog']	       | 'dog'            |
 | s.push(True)	      | [4,'dog',True]     |                  |	 
 | s.size()	          | [4,'dog',True]	   | 3                |
-| s.isEmpty()	        | [4,'dog',True]	   | False            |
-| s.push(8.4)	        | [4,'dog',True,8.4] |                  | 	 
-| s.pop()	            | [4,'dog',True]	   | 8.4              |
-| s.pop()	            | [4,'dog']	         | True             |
-| s.size()	          | [4,'dog']	         | 2                |
+| s.isEmpty()	      | [4,'dog',True]	   | False            |
+| s.push(8.4)	      | [4,'dog',True,8.4] |                  | 	 
+| s.pop()	          | [4,'dog',True]	   | 8.4              |
+| s.pop()	          | [4,'dog']	       | True             |
+| s.size()	          | [4,'dog']	       | 2                |
 
 **Implementing a Stack in Python**
 
@@ -146,15 +146,15 @@ As an example, if we assume that q is a queue that has been created and is curre
 
 | **Queue Operation** | **Queue Contents** | **Return Value** |
 |:--------------------|:-------------------|:-----------------|
-| q.isEmpty()	        | []	               | True             |
+| q.isEmpty()	      | []	               | True             |
 | q.enqueue(4)	      | [4]                |                  |	 
 | q.enqueue('dog')	  | ['dog',4]          |                  |	 
-| q.enqueue(True)	    | [True,'dog',4]	   |                  |
+| q.enqueue(True)	  | [True,'dog',4]	   |                  |
 | q.size()	          | [True,'dog',4]	   | 3                |
-| q.isEmpty()	        | [True,'dog',4]	   | False            |
-| q.enqueue(8.4)	    | [8.4,True,'dog',4] |                  |	 
-| q.dequeue()	        | [8.4,True,'dog']	 | 4                |
-| q.dequeue()	        | [8.4,True]	       | 'dog'            |
+| q.isEmpty()	      | [True,'dog',4]	   | False            |
+| q.enqueue(8.4)	  | [8.4,True,'dog',4] |                  |	 
+| q.dequeue()	      | [8.4,True,'dog']   | 4                |
+| q.dequeue()	      | [8.4,True]	       | 'dog'            |
 | q.size()	          | [8.4,True]	       | 2                |
 
 ```
