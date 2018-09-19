@@ -215,10 +215,93 @@ The map abstract data type is defined as follows. The structure is an unordered 
 
 ## Sorting
 ### The Bubble Sort
+The **bubble sort** makes multiple passes through a list. It compares adjacent items and exchanges those that are out of order. Each pass through the list places the next largest value in its proper place. In essence, each item “bubbles” up to the location where it belongs.
+
+The Figure below shows the first pass of a bubble sort. The shaded items are being compared to see if they are out of order. If there are n items in the list, then there are n-1 pairs of items that need to be compared on the first pair.  
+
+![](http://interactivepython.org/courselib/static/pythonds/_images/bubblepass.png)
+
+```
+def bubbleSort(alist):
+    for passnum in range(len(alist) - 1, 0 , -1):
+        for i in range(passnum):
+            if alist[i] > alist[i+1]:
+                # Swape
+                temp = alist[i+1]
+                alist[i+1] = alist[i]
+                alist[i] = temp
+        print(alist)
+
+alist = [54, 26, 93, 17, 77, 31, 44, 55, 20]
+bubbleSort(alist)
+print(alist)
+---------------------------------------------------
+[26, 54, 17, 77, 31, 44, 55, 20, 93]
+[26, 17, 54, 31, 44, 55, 20, 77, 93]
+[17, 26, 31, 44, 54, 20, 55, 77, 93]
+[17, 26, 31, 44, 20, 54, 55, 77, 93]
+[17, 26, 31, 20, 44, 54, 55, 77, 93]
+[17, 26, 20, 31, 44, 54, 55, 77, 93]
+[17, 20, 26, 31, 44, 54, 55, 77, 93]
+[17, 20, 26, 31, 44, 54, 55, 77, 93]
+```
+
+**Analysis**
+
+To analyze the bubble sort, we should note that regardless of how the items are arranged in the initial list, n−1 passes will be made to sort a list of size n. The total number of comparison is 1/2 (n^2) - 1/2 (n). It's **O(n^2)** comparisons. 
+
+| Pass | Comparisons |
+|:-----|:------------|
+| 1    | n - 1       |
+| 2    | n - 2       |
+| ...  | ...         |
+| n - 1| 1           |
+
+**Short Bubble Sort**
 
 ### The Selection Sort
 
+The **selection sort** improves on the bubble sort by making only one exchange for every pass through the list. In order to do this, a selection sort looks for the largest value as it makes a pass and, after completing the pass, places it in the proper location. As with a bubble sort, after the first pass, the largest item is in the correct place. After the second pass, the next largest is in place. This process continues and requires n−1 passes to sort n items, since the final item must be in place after the (n−1) st pass.
+
+The Figure below shows the entire sorting process. On each pass, the largest remaining item is selected and then placed in its proper location. The first passs places 93, the second pass places 77, the third pass places 55, and so on. 
+
+![](http://interactivepython.org/courselib/static/pythonds/_images/selectionsortnew.png)
+
+```
+def selectionSort(alist):
+    for fillslot in range(len(alist) - 1, 0 ,-1):
+
+        max_index = 0
+
+        for i in range(1, fillslot + 1):
+            if alist[max_index] < alist[i]:
+                max_index = i
+
+        temp = alist[fillslot]
+        alist[fillslot] = alist[max_index]
+        alist[max_index] = temp
+
+        print(alist)
+
+alist = [54, 26, 93, 17, 77, 31, 44, 55, 20]
+selectionSort(alist)
+--------------------------------------------------
+[54, 26, 20, 17, 77, 31, 44, 55, 93]
+[54, 26, 20, 17, 55, 31, 44, 77, 93]
+[54, 26, 20, 17, 44, 31, 55, 77, 93]
+[31, 26, 20, 17, 44, 54, 55, 77, 93]
+[31, 26, 20, 17, 44, 54, 55, 77, 93]
+[17, 26, 20, 31, 44, 54, 55, 77, 93]
+[17, 20, 26, 31, 44, 54, 55, 77, 93]
+[17, 20, 26, 31, 44, 54, 55, 77, 93]
+```
+
+**Analysis**
+
+You may see that the selection sort makes the same number of comparisons as the bubble sort and is therefore also **O(n^2)**. However, due to the reduction in the number of exchanges, the selection sort typically executes faster in benchmark studies. In fact, for our list, the bubble sort makes 20 exchanges, while the selection sort makes only 8.
+
 ### The insertion Sort
+
 
 ### The Shell Sort
 
