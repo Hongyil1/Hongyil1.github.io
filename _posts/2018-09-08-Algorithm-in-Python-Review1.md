@@ -300,8 +300,75 @@ selectionSort(alist)
 
 You may see that the selection sort makes the same number of comparisons as the bubble sort and is therefore also **O(n^2)**. However, due to the reduction in the number of exchanges, the selection sort typically executes faster in benchmark studies. In fact, for our list, the bubble sort makes 20 exchanges, while the selection sort makes only 8.
 
+| Pass | Comparisons |
+|:-----|:------------|
+| 1    | n - 1       |
+| 2    | n - 2       |
+| ...  | ...         |
+| n - 1| 1           |
+
 ### The insertion Sort
 
+The **insertion sort**, although still **O(n^2)**, works in a slightly different way. It always maintains a sorted sublist in the lower positions of the list. Each new item is then “inserted” back into the previous sublist such that the sorted sublist is one item larger. The following Figure shows the insertion sorting process. The shaded items represent the ordered sublists as the algorithm makes each pass.
+
+![](http://interactivepython.org/courselib/static/pythonds/_images/insertionsort.png)
+
+We begin by assuming that a list with one item (position 0) is already sorted. On each pass, one for each item 1 through n−1, the current item is checked against those in the already sorted sublist. As we look back into the already sorted sublist, we shift those items that are greater to the right. **When we reach a smaller item or the end of the sublist, the current item can be inserted.**
+
+The following Figure shows the fifth pass in detail. At this point in the algorithm, a sorted sublist of five items consisting of 17, 26, 54, 77, and 93 exists. We want to insert 31 back into the already sorted items. The first comparison against 93 causes 93 to be shifted to the right. 77 and 54 are also shifted. When the item 26 is encountered, the shifting process stops and 31 is placed in the open position. Now we have a sorted sublist of six items.
+
+![](http://interactivepython.org/courselib/static/pythonds/_images/insertionpass.png)
+
+```
+def insertionSort(alist):
+    for index in range(1, len(alist)):
+
+        current_value = alist[index]
+        current_position = index
+
+        while current_position > 0 and alist[current_position - 1] > current_value:
+            alist[current_position] = alist[current_position - 1]
+            current_position = current_position - 1
+
+        alist[current_position] = current_value
+        print(alist)
+
+alist = [54, 26, 93, 17, 77, 31, 44, 55, 20]
+insertionSort(alist)
+----------------------------------------------
+[26, 54, 93, 17, 77, 31, 44, 55, 20]
+[26, 54, 93, 17, 77, 31, 44, 55, 20]
+[17, 26, 54, 93, 77, 31, 44, 55, 20]
+[17, 26, 54, 77, 93, 31, 44, 55, 20]
+[17, 26, 31, 54, 77, 93, 44, 55, 20]
+[17, 26, 31, 44, 54, 77, 93, 55, 20]
+[17, 26, 31, 44, 54, 55, 77, 93, 20]
+[17, 20, 26, 31, 44, 54, 55, 77, 93]
+```
+
+**Analysis**
+
+The implementation of insertionSort shows that there are again n−1 passes to sort n items. The maximum number of comparisons for an insertion sort is the sum of the first n−1 integers. Again, this is **O(n^2)**. However, in the best case, only one comparison needs to be done on each pass, that is **O(n)**. This would be the case for an already sorted list.
+
+**Worst Case** [5, 4, 3, 2, 1]
+
+| Pass | Comparisons |
+|:-----|:------------|
+| 1    | 1           |
+| 2    | 2           |
+| ...  | ...         |
+| n - 1| n - 1       |
+
+**Best Case** [1, 2, 3, 4, 5]
+
+| Pass | Comparisons |
+|:-----|:------------|
+| 1    | 1           |
+| 2    | 1           |
+| ...  | ...         |
+| n - 1| 1           |
+
+One note about shifting versus exchanging is also important. In general, a shift operation requires approximately a third of the processing work of an exchange since only one assignment is performed. In benchmark studies, insertion sort will show very good performance.
 
 ### The Shell Sort
 
