@@ -60,17 +60,19 @@ e.g. What's your favourite colour?
 My favourite colour is blue because it's the color of sky on a nice day.
 
 **A good way to practise:**
-- Do you like ...? : games, walking, gardens, flowers, dancing
+
+Do you like ...? : games, walking, gardens, flowers, dancing
 
 ## Full example of speaking part 1
-- 2 or 3 introduction question?
+**2 or 3 introduction question?**
+
 DO you work or are you a student?
 
 Do you enjoy your job/ studies?
 
 Would you like to get a different job in the future?
 
-- 4 questions about one topic
+**4 questions about one topic**
 
 e.g. Let's talk about ...
 
@@ -82,7 +84,7 @@ Why do you think some sports are so popular?
 
 Do you think children should all have to do sports at school?
 
-- 4 questions about a second topic
+**4 questions about a second topic**
 
 What's your favourite coulour? Why?
 
