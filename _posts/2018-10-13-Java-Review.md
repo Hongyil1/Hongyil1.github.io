@@ -354,9 +354,116 @@ Aloha, Kitty!
 ```
 
 # Immutable Objects
+## Objects
+- Each object is an instance of some class.
+- An object holds some data (state) and supports some operations.
 
+### Creatiing New Objects
+New Class (expr1, expr2) or Class var = new Class (expr1, expr2, ..)
 
+E.g. Scanner kbd = new Scanner(System.in);
 
+### Using Objects
+object.method(args1, args2)
+
+### null
+- null is special value that means "there is no object here."
+```
+String s = ...  // String is an object
+if (s != null) {
+    System.out.println("the string is " + s);
+}
+```
+## Class
+Classes contain:
+- Instance variables, which hold the data of an object
+- (Instance) methods, which define the operations (code) of an object
+
+Each object has its own value for each instance varibale.
+
+All objects of a class have the same methods.
+
+### Declaring Instance Variables
+- Declare instance variable inside class, but outside any method
+- Form: private type name;
+```
+public class Person {
+    private String familyName;
+    private String givenName;
+    ...
+}
+```
+
+### Assigning and Using Instance Variablesa
+- can be assigned by name: object.name = ..
+- Local variables live in a **method**; static variables live in a **class**; instance variables live in a **object**.
+Local varibale only live while method is executing, they should be initialised every time method executes; Instance variables live as long as object is around, ther must be initialised when declared or when object is created; static variable lives as long as the program is running, they must be initialised where declared, which is executed when program starts; 
+
+### Accessors
+If you declare instance variables private. An accessor is a very simple method written for this purpose.
+```
+public class Person {
+    private String familyName;
+    private String givenName;
+    ...
+    public String getFullName() {
+        return familyName + ", " + givenName;
+    }...
+    
+    public String getFamilyName() {
+        return familyName;
+    }
+}
+```
+
+## Constructors
+Constructors are special methods responsible for initialising instance varibales.
+```
+public ClassName(type1 var1, ...){
+    ...
+}
+```
+**Constructor** always have the smae name as class.
+
+## this
+- Inside a method, special keyword **this** always holds the object the current message was sent to.
+- Inside constructor, **this** is the object being created.
+```
+//Constructor
+public Person(String givenName, String FamilyName) {
+    this.givenName = givenName;
+    this.familyName = familyName;
+}
+```
+
+## Null Pointer Exception
+- If you forget to check that an object is not null before sending it a message or accessing its instance variables, you will get a null pointer exception.
+
+## Immutable Objects
+- Immutable objects cannot be changed once they are created.
+- To be immutable, a class must not have any public methods that modify the object (just constructor).
+- **String** class is immutable. Primitive types are also immutable.
+- Best practice: make classes immutable if possible
+
+## Final
+Add **final** keyword to instance variables before type. The Java will only let you set it once.
+```
+public class ImmutablePerson {
+    private final String familyName;
+    private final String givenName;
+    
+    public ImmutablePerson(String familyName, String givenName) {
+        this.familyName = familyName;
+        this.givenName = givenName;
+    }
+```
+
+## Class vs. Instance Messages
+- An instance message is sent an individual object
+- A class message is sent to the whole class. Not to any individual object
+- So a class method does not have (cannot use) **this**
+- Class method **cannot** access instance variables! Class methods cannot use instance methods (without specifying object. in front)
+- but instance methods **can** use class methods
 
 
 
