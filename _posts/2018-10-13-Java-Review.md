@@ -548,7 +548,17 @@ public static void main(String args[]) {
 <img width="225" alt="capture" src="https://user-images.githubusercontent.com/22671087/46905836-fdf1ad00-cf44-11e8-8736-5b2c17238fce.PNG">
 
 ## Mutating aliased objects
+If multiple variables refer to same object, they are called *aliases*. Changing one alias **changes all of them**.
+```
+public static void main(String args[]) {
+    Person foo = new Person(5, "Bo Peep");
+    Person bar = foo;
+    foo.setAge(6);
+}
+```
+<img width="221" alt="capture" src="https://user-images.githubusercontent.com/22671087/46906090-bc173580-cf49-11e8-8b07-65de8f759f08.PNG">
 
+## Class Invariants
 
 
 
