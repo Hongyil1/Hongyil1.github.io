@@ -65,6 +65,49 @@ Other operations:
 
 **x--** (post-decrement) returns x and then decrements it.
 
-## Type
+## Type Conversion
+Primitive operations work on operands of the same type. But Java can convert types for you automatically.
+<img width="350" alt="capture" src="https://user-images.githubusercontent.com/22671087/46899509-05cb3600-cee0-11e8-9aea-b1bb15db0c03.PNG">
+
+### Casting
+Narrowing conversions are also possible. But they must be performed explicitly using a cast
+
+**Cast** is specified by writing the name of the type to convert to in parentheses before the value to be converted. 
+```
+int sum;
+int count;
+double average = (double)sum/ count;
+```
+
+## Formatted Output
+System.out.printf(format-string , args...); E.g.: System.out.printf("Average: %5.2f", average);
+
+**format-string** is an ordinary string, but can contain format specifiers, one for each of the args:
+- Format specifier begins with %,
+- may have a number specifying how to format the next value in the args... list
+- ends with a letter specifying the type of the value
+
+### Format Letters
+<img width="371" alt="capture" src="https://user-images.githubusercontent.com/22671087/46899632-1a5bfe00-cee1-11e8-8401-091f4bff9ca2.PNG">
+
+## Reading Console input
+**Scanner** class:
+```
+import java.util.Scanner
+
+class Demo{
+
+    public static void main(String[] args){
+        Scanner keyboard = new Scanner(System.in);
+        String line = keyboard.nextLine();
+    }
+}
+```
+Other methods to read from a Scanner variable keyboard:
+<img width="360" alt="capture" src="https://user-images.githubusercontent.com/22671087/46899698-41ff9600-cee2-11e8-8a63-d7c368ecc9be.PNG">
+
+
+
+
 
 
