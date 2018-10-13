@@ -104,7 +104,9 @@ class Demo{
 }
 ```
 Other methods to read from a Scanner variable keyboard:
+
 <img width="360" alt="capture" src="https://user-images.githubusercontent.com/22671087/46899698-41ff9600-cee2-11e8-8a63-d7c368ecc9be.PNG">
+
 
 
 
