@@ -27,5 +27,44 @@ Variable names begin with a letter, and follow with letters, digits, and undersc
 Each variable **must** be declared, specifying its type.
 
 # Input/Output
+## Operations for booleans
+**&&** (and) is true iff both operands are
+
+**||** (or) is true iff either operand is
+
+**!** (not) is true iff its operand is false
+
+## String
+String is a class type, so strings are **objects**.
+
+Certain letters after backslash are treated specially:
+
+- \n: newline (end current line)
+- \r: return (go to start of current line)
+- \b: backspace
+- \t: tab character
+
+### String Operations
+You can use **+** to append two strings. If either operand is a string, it will turn the other into a string.
+
+Other operations:
+
+- **s.length()** returns the length of the string
+- **s.toUpperCase()** returns ALL UPPER CASE version of string
+- **s.toLowerCase()** RETURNS all lower case VERSION
+- **s.substring(i,j)** returns the substring of s from character i through j-1, counting the first character as 0. E.g., "smiles".substring(1,5) is "mile"
+- **s.equals(s2)** returns true iff s and s2 are identical
+- **s.indexOf(s2)** returns the first position of s2 in s
+
+## Pre/Post Increment/Decrement
+**++x** is a special expression that increments x (for any variable x) and returns the incremented value. E.g., if x is 7, ++x is 8, and after that, x is 8. **(increase then return)**
+
+**--x** (pre-decrement) is similar: it decrements x and returns it.
+
+**x++** (post-increment) returns x and then increments it. E.g., if x is 7, x++ is 7, and after that, x is 8. **(return then increase)**
+
+**x--** (post-decrement) returns x and then decrements it.
+
+## Type
 
 
