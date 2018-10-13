@@ -465,6 +465,92 @@ public class ImmutablePerson {
 - Class method **cannot** access instance variables! Class methods cannot use instance methods (without specifying object. in front)
 - but instance methods **can** use class methods
 
+# Mutable Objects
+## How to test
+- **Unit testing**: testing that individual classes and methods behave correctly. For each aspect of the specification, write code to
+establish the conditions of that aspect, and check that the result is as expected.
+- **Regression testing**: running a suite of tests whenever you modify your code, looking for new bugs.
+- Ensure that **corner cases** (situations where things happen differently than usual) are tested Where there are **boundary conditions**, test just before, at, and just after the boundary.
+
+## Mutable Objects and Classes
+- Instance variables not declared *final* can be modified by methods.
+- Mutable objects must be understood in terms of their behaviour in memory.
+
+## Memory
+- Computer memory is a long sequence of bytes. Computer can access any byte by its address (its position in the sequence).
+- A short is stored over 2 bytes, an int over 4, etc.
+- Computer reads multiple bytes at once and assembles into a short, int, double, etc
+
+### Objects
+- An object is stored in memory by storing its **instance variables**
+- An object at memory address 3270 with 2 int variables holding 5 and 10 might appear in memory as following
+- Actual values of a byte are 0-255 or -128-127, not 0-99
+- Actual addresses are much larger than this illustration
+<img width="95" alt="capture" src="https://user-images.githubusercontent.com/22671087/46905641-72771c80-cf42-11e8-9974-192364e34404.PNG">
+
+### References (Pointers)
+- Object types are stored by storing their address. E.g., to store a String, a variable holds its address, not its content. 
+- We show the string stored at 7192, but it could be anywhere in memory. E.g., an object with int and String variables holding 5 and "Bo Peep" would be stored as at right
+- The address of an object is called a *reference* or *pointer* to it.
+
+### Depicting Objects
+- If a variable foo holds (a reference to) this object, it could be depicted as
+<img width="265" alt="capture" src="https://user-images.githubusercontent.com/22671087/46905728-6d669d00-cf43-11e8-8dfa-b30c334999c0.PNG">
+
+```
+public class Person {
+    private int age;
+    private String name;
+    public Person(int age, String name) {
+        this.age = age; this.name = name;
+    }
+    
+    public String toString() {
+        return name + ", age " + age;
+    }
+    
+    public static void main(String args[]) {
+        Person foo = new Person(5, "Bo Peep");
+        ...
+    }
+}
+```
+
+### Changing objects
+With immutable *Person* class, only way to change the object foo points to is assign a new object
+```
+public static void main(String args[]) {
+    Person foo = new Person(5, "Bo Peep");
+    foo = new Person(3, "Shaun Sheep");
+}
+```
+<img width="241" alt="capture" src="https://user-images.githubusercontent.com/22671087/46905782-1b724700-cf44-11e8-8196-37231b5d4618.PNG">
+
+## Garbage Collection
+- No variable (or object) points to orginal object
+- Java has a *garbage collector(GC)* that "reclaims" such objects so the memory can be used again.
+
+### Mutators
+If instance variable is not declared *final*, methods can reassign it.
+```
+public void setAge(int age){
+    this.age = age;
+}
+public int getAge() {
+    return this.age;
+}
+
+public static void main(String args[]) {
+    Person foo = new Person(5, "Bo Peep");
+    foo.setAge(6);
+}
+```
+<img width="225" alt="capture" src="https://user-images.githubusercontent.com/22671087/46905836-fdf1ad00-cf44-11e8-8736-5b2c17238fce.PNG">
+
+## Mutating aliased objects
+
+
+
 
 
 
