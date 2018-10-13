@@ -205,6 +205,123 @@ public class forExample {
 
 **Syste.exit(0)** immediately exit whole program.
 
+# Methods
+A **method** is an operation defined by a class
+
+Java supports two kinds of methods:
+- Class or static methods, and
+- Instance or non-static methods
+
+## Class methods
+Form: Class .method (expr1 , expr2 , ...). The exprs, called arguments, provide data for the
+method to use.
+
+### The Math Class
+The Math class is a library of class methods and constants, including: 
+
+<img width="384" alt="capture" src="https://user-images.githubusercontent.com/22671087/46900709-1a182e80-cef2-11e8-833c-c4a99a3323ba.PNG">
+
+### Wrapper Classes
+For each primitive type, there is a *warpper class* that defines some useful class methods:
+
+<img width="182" alt="capture" src="https://user-images.githubusercontent.com/22671087/46900735-94e14980-cef2-11e8-8a7e-1599d6ada9db.PNG">
+
+### Covert from Primitive to String
+<img width="295" alt="capture" src="https://user-images.githubusercontent.com/22671087/46900745-d3770400-cef2-11e8-85ab-907d04165c13.PNG">
+
+### Parsing Numeric Strings
+<img width="297" alt="capture" src="https://user-images.githubusercontent.com/22671087/46900766-44b6b700-cef3-11e8-856d-b81e04cf5313.PNG">
+
+### The main Method
+The main is a class method. Java executes the main method when running an application.
+
+### Defining Class Methods
+```
+public static type name (type1 var1, type2 var2, ...) {
+    .
+    .
+}
+```
+Each var is called a parameter. Type of corresponding arguments and parameters must match.
+
+```
+public class Hypot2 {
+    public static void main(String[] args) {
+        double side1 = Double.parseDouble(args[0]);
+        double side2 = Double.parseDouble(args[1]);
+        double hypot = hypot(side1, side2);
+        System.out.println(hypot);
+    }
+    
+    public static double hypot(double side1, double side2) {
+        return Math.sqrt(side1*side1 + side2*side2);
+    }
+}
+```
+
+## When to define Methods
+- When a method gets too big (more than can be easily viewed at once, more than ≈ 60 lines)
+- When you repeat similar code multiple times
+- When you can give a good name to a chunk of code (e.g., hypot)
+
+## Overloading
+*abs*, *min*, and *max* methods all work on all of double, float, int, and long types.
+
+**Overloading**: when a method name has multiple definitions, each with different signature. Java automatically selects the method whose signature matches the call. Method name plus number and types of arguments togerther called the method signature. Signature is used to decide which method to call.
+
+```
+public class Test {
+    public static void main(String []args){
+        int a = 1;
+        int b = 2;
+        int c = 3;
+        Test t1 = new Test();
+        System.out.println(t1.addNumber(a, b, c));
+    }
+
+    public int addNumber(int a, int b){
+        return a + b;
+    }
+    
+    // overload
+    public double addNumber(double a, double b) {
+        return a + b;
+    }
+    
+    // overload
+    public int addNumber(int a, int b, int c){
+        return a + b + c;
+    }
+}
+```
+### Limitations of Overloading
+- You cannot define two methods with the same name and all the same argument types
+- You cannot overload based on return type, only parameter types
+```
+public int addNumber(int a, int b){
+    return a + b;
+}
+
+public double addNumber(int a, int b) {
+    return a + b;
+}
+
+----------------------------------------------
+error: method addNumber(int,int) is already defined in class test
+```
+- Beware of combining overloading with automatic type conversion
+```
+
+```
+
+
+
+
+
+
+
+
+
 
 
 
