@@ -358,7 +358,7 @@ Aloha, Kitty!
 - Each object is an instance of some class.
 - An object holds some data (state) and supports some operations.
 
-### Creatiing New Objects
+### Creating New Objects
 New Class (expr1, expr2) or Class var = new Class (expr1, expr2, ..)
 
 E.g. Scanner kbd = new Scanner(System.in);
