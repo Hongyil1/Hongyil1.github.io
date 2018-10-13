@@ -65,6 +65,15 @@ Other operations:
 
 **x--** (post-decrement) returns x and then decrements it.
 
+```
+i = 0;
+a = i++; // a = 0, i = 1
+
+i = 0;
+b = ++i; // b = 1; i = 1
+```
+**There is no difference when used in for loop**
+
 ## Type Conversion
 Primitive operations work on operands of the same type. But Java can convert types for you automatically.
 <img width="350" alt="capture" src="https://user-images.githubusercontent.com/22671087/46899509-05cb3600-cee0-11e8-9aea-b1bb15db0c03.PNG">
@@ -107,6 +116,94 @@ Other methods to read from a Scanner variable keyboard:
 
 <img width="360" alt="capture" src="https://user-images.githubusercontent.com/22671087/46899698-41ff9600-cee2-11e8-8a63-d7c368ecc9be.PNG">
 
+# Control
+## If
+if statement decides whether or not to execute a statement based on a boolean expression.
+```
+if (x < 0) {
+    x = -x;
+} else if (x == 0) {
+    x = x + 1;
+} else {
+    x = x - 1;
+}
+```
+**Ternary Operator**: expr1 ? expr2 : expr3; E.g. lesser = x < y ? x : y;
+
+If expr1 is true value is expr2; If expr1 is false value is expr3.
+
+## Switch
+```
+switch (ch) {
+    case '.':
+        System.out.print("dot ");
+        break;
+    case '-':
+        System.out.print("dash ");
+        break;
+    case ' ':
+        System.out.println();
+        break;
+    default:
+        System.out.println("\nbad character '" + ch + "'");
+        break;
+}
+```
+
+## While
+```
+public class WhileExample{
+    public static void main(String[] args) {
+        int i = 1;
+        int limit = 10;
+        int sum = 0;
+        while (i <= limit) {
+            sum += i;
+            ++i;
+        }
+        System.out.println("The sum is" + sum);
+    }
+}
+```
+
+## Do while
+do *Statement* while (expr): First execute Statement. Then if expr is true, go back and do it again.
+```
+public class dowhileExample {
+    public static void main (String[] args){
+        int i = 1;
+        int limit = 10;
+        int sum = 0;
+        do {
+            sum += i;
+            ++i;
+        } while (i <= limit);
+        System.out.println("The sum is " + sum);
+    }
+}
+```
+
+## For
+for (init ; test ; update) *Statement*
+```
+public class forExample {
+    public static void main(String[] args) {
+        int limit = 10;
+        int sum = 0;
+        for (int i = 0; i <= limit; i++){
+            sum += i;
+        }
+        System.out.prinln("The sum is " + sum);
+    }
+}
+```
+
+## break and continue
+**break** terminates the (innermost) loop immediately.
+
+**continue** immediately returns to the top of the innermost loop and continues from there.
+
+**Syste.exit(0)** immediately exit whole program.
 
 
 
@@ -114,3 +211,16 @@ Other methods to read from a Scanner variable keyboard:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+ 
