@@ -10,9 +10,22 @@ tags:
     - Java
 ---
 
+# Getting start
 ## Compilation
 **javac** is the Java compiler included in the Java Development Kit(JDK) from Oracle. The compiler accepts source code written by user in Java language and produces Java bytecode conforming to the Java Virtual Machine(JVM).
 
 A **.class** file is a compiled **.java** file. **.java** is all text and is human readable. **.class** file is for JVM.
 
 <img width="231" alt="capture" src="https://user-images.githubusercontent.com/22671087/46899227-783a1700-cedc-11e8-93f5-1aaa5726284f.PNG">
+
+## Primitive Types
+<img width="389" alt="capture" src="https://user-images.githubusercontent.com/22671087/46899276-00b8b780-cedd-11e8-82dd-198d14cb1ba9.PNG">
+
+## Varibales
+Variable names begin with a letter, and follow with letters, digits, and underscores. E.g. height, windowHeight.
+
+Each variable **must** be declared, specifying its type.
+
+# Input/Output
+
+
