@@ -310,10 +310,50 @@ public double addNumber(int a, int b) {
 error: method addNumber(int,int) is already defined in class test
 ```
 - Beware of combining overloading with automatic type conversion
-```
+
+## public and private
+- The keyword *public* in method header means the method may be used by any method in any class.
+- The keyword *private* in header means the method may only be used from within that class.
+- Best practice: make methods private unless they need to be public
+
+## Local Varibales
+- Scope: where variable can be referenced 
+- Variables declared inside methods are local to the method (cannot be used outside) Cannot be referenced before declaration is executed
+- Variable’s value is forgotten when it goes out of scope; gets a fresh value next time in scope
+- Variable declared inside a block is scoped to that block. Parameters are also local to the method
+- Local variables cannot be declared public or private
+
+## Class Variables
+- Class variable is a variable that is local to a class
+- Created when program starts, exists until exit
+- Value survives through message calls and returns. Value is unchanged until reassigned
+- Can be declared either public or private. It should almost always be private. Too difficult to control if every method in every class can modify it.
 
 ```
+public class ClassVar {
+    private static String name = "Someone"; // class variable
+    public static void main(String[] args) {
+        greet("Hello");
+        setName("Kitty");
+        greet("Hello");
+        greet("Aloha");
+    }
+    
+    private static void setName(String name) {
+        ClassVar.name = name; // 2 vars called name!
+    }
+    
+    private static void greet(String greeting) {
+        System.out.printf("%s, %s!%n", greeting, name);
+    }
+}
+-----------------------------------------------------------------
+Hello, Someone!
+Hello, Kitty!
+Aloha, Kitty!
+```
 
+# Immutable Objects
 
 
 
